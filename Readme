@@ -1,0 +1,21 @@
+网站路径
+
+	mytp
+	|___Config  存放配置文件
+	|
+	|___Controller  控制器 逻辑代码
+	|	
+	|___Core 框架
+	|
+	|___Model  模型
+	|
+	|___Vender  第三方类包
+	|
+	|___Views   视图模板
+
+
+主要功能入口:
+
+	mytp/index.php web入口
+	mytp/shell.php shell执行入口
+	mytp/Queue.php 队列入口(只能使用Queue控制器 redis key名为方法)
