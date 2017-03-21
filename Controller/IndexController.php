@@ -7,7 +7,7 @@ class IndexController extends Controller
 		
 	}
 
-	function index()
+	function index(User $a, $c)
 	{
 		// $redis = new Redis();
 		// $redis->pconnect('127.0.0.1', 6379, 0);

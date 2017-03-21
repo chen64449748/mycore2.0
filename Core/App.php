@@ -3,7 +3,7 @@
 * 框架主要类  负责框架前期工作
 自动加载  设置字符集   配置文件
 */
-class App
+class App extends Container
 {
 	public function __construct()
 	{
@@ -16,6 +16,10 @@ class App
 	
 		// 调用不同的驱动 加载不同模式
 		try {
+			$this->bind('Web','Web');
+
+			$web = $this->build('Web');
+			print_r($web);exit;
 			$driver = new Driver($drivename);
 			$app = $driver->getDriver();
 			$app->run();	

@@ -6,13 +6,13 @@
 interface IContainer
 {
 	// 赋值 对象
-	public function instance();
+	//public function instance();
 
 	// make出一个对象
-	public function make();
+	//public function make();
 
 	// 自动以来注入
-	public function bulid();
+	// public function bulid();
 
 	// 注册对象
 	

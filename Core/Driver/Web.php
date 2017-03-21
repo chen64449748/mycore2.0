@@ -6,19 +6,19 @@
 class Web implements IDriver
 {
 	// 给每个页面设置 字符集
-	private static function setChar()
+	private function setChar()
 	{
 		header('content-type:text/html;charset=utf-8');
 	}
 
 	// session配置
-	private static function startSession()
+	private function startSession()
 	{
 		Session::start();
 	}
 
 	// 调用控制器
-	private static function analyseURL()
+	private function analyseURL()
 	{
 		if (isset($_SERVER['PATH_INFO'])) {
 			$path_info = ltrim($_SERVER['PATH_INFO'], '/');
@@ -35,7 +35,7 @@ class Web implements IDriver
 	}
 
 	// 请求
-	public static function dispatch()
+	public function dispatch()
 	{
 		$module = MODULE.'Controller';
 		$action = ACTION;
@@ -47,6 +47,10 @@ class Web implements IDriver
 			throw new Exception('没有找到action:'.ACTION, 99);
 		}
 		
+		$rm = $reflection->getMethod('index');
+
+		var_dump($rm->getParameters()[1]->getClass());exit;
+
 		define('CONTROLLER_PATH', str_replace('\\', '/', $reflection->getFileName()));
 		$web = $reflection->newInstance();
 		$result = $web->$action();
@@ -55,7 +59,7 @@ class Web implements IDriver
 	}
 	
 	// 包含文件
-	public static function inBootstrap()
+	public function inBootstrap()
 	{
 		include_once MYTP_DIR.'Bootstrap/function.php';
 		include_once MYTP_DIR.'Bootstrap/Events.php';
@@ -65,12 +69,11 @@ class Web implements IDriver
 
 	public function run()
 	{
-		self::setChar();
-		self::startSession();
-		self::analyseURL();
-		self::inBootstrap();
-		self::dispatch();
-		echo 1;
+		$this->setChar();
+		$this->startSession();
+		$this->analyseURL();
+		$this->inBootstrap();
+		$this->dispatch();
 	}
 
 	public function error(Exception $e)

@@ -7,5 +7,5 @@ interface IDriver
 
 	public function error(Exception $e);
 
-	public static function dispatch();
+	public function dispatch();
 }
