@@ -6,4 +6,5 @@ include_once 'Autoload.php';
 Autoload::auto();
 
 $app = new App();
-$app->run('Web');
+
+$app->run($app->make('Web'));

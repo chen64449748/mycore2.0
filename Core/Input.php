@@ -6,12 +6,12 @@ class Input
 {
 	public static function get($key, $default = null)
 	{
-		return $_REQUEST[$key]?$_REQUEST[$key]:$default;
+		return isset($_REQUEST[$key])?$_REQUEST[$key]:$default;
 	}
 
 	public static function post($key, $default = null)
 	{
-		return $_POST[$key]?$_POST[$key]:$default;
+		return isset($_POST[$key])?$_POST[$key]:$default;
 	}
 
 	public static function all()

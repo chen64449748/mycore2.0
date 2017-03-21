@@ -5,6 +5,12 @@
 */
 class Web implements IDriver
 {
+
+
+	function __construct()
+	{
+
+	}
 	// 给每个页面设置 字符集
 	private function setChar()
 	{
@@ -33,30 +39,6 @@ class Web implements IDriver
 		define('MODULE', $module);
 		define('ACTION', $action);
 	}
-
-	// 请求
-	public function dispatch()
-	{
-		$module = MODULE.'Controller';
-		$action = ACTION;
-		$reflection = new ReflectionClass($module);
-		if (!$reflection) {
-			throw new Exception('没有找到controller:'.MODULE, 99);
-		}
-		if (!$reflection->hasMethod($action)) {
-			throw new Exception('没有找到action:'.ACTION, 99);
-		}
-		
-		$rm = $reflection->getMethod('index');
-
-		var_dump($rm->getParameters()[1]->getClass());exit;
-
-		define('CONTROLLER_PATH', str_replace('\\', '/', $reflection->getFileName()));
-		$web = $reflection->newInstance();
-		$result = $web->$action();
-		echo $result;
-		
-	}
 	
 	// 包含文件
 	public function inBootstrap()
@@ -67,13 +49,13 @@ class Web implements IDriver
 	}
 
 
-	public function run()
+	public function run(App $app)
 	{
 		$this->setChar();
 		$this->startSession();
 		$this->analyseURL();
 		$this->inBootstrap();
-		$this->dispatch();
+		$app->dispatch();
 	}
 
 	public function error(Exception $e)

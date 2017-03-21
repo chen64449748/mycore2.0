@@ -1,7 +1,7 @@
 <?php
 class User 
 {
-	public static function index()
+	public function index()
 	{
 		echo 'user index';
 	}

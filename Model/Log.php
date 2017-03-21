@@ -1,9 +1,12 @@
 <?php 
 
 // 日志代理器
-class LogProxy extends ReflectionClass
+class Log
 {
-	
+	function e()
+	{
+		echo 1;
+	}
 }
 
 ?>
