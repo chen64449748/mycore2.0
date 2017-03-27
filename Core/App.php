@@ -81,7 +81,7 @@ class App extends Container
 					$input = $container->make('Input');
 					return $input->get($name, null);
 				},
-				$params
+				$params // 参数引用类型
 			);
 		}
 

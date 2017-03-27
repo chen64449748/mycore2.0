@@ -1,5 +1,4 @@
 <?php
 
 //用于执行Queue类型任务
-
-include_once 'Core/Queue.php';
+require_once __DIR__.'/Bootstrap/queue.php';
