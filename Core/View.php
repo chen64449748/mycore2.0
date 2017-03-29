@@ -66,7 +66,7 @@ class View
 
 	public static function display($path = null)
 	{
-		Import::in('Vender/Smarty/libs/Smarty.class.php');
+		Import::in('Smarty/libs/Smarty.class.php');
 
 		self::setViewPath($path);
 

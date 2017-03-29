@@ -19,6 +19,11 @@ class Input
 		return $_REQUEST;
 	}
 
+	public static function import($arr)
+	{
+		$_REQUEST = array_merge($_REQUEST, $arr);
+	}
+
 	public static function getArgvs()
 	{
 		if (isset($_SERVER['argv'])) {

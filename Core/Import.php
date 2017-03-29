@@ -6,8 +6,8 @@ class Import
 {
 	private static function path($path)
 	{
-		$path = ltrim($path , 'Vender/');
-		$path = MYTP_VENDER.$path;
+		$path = ltrim($path , 'vendor/');
+		$path = MYTP_VENDOR.$path;
 		return $path;
 	}
 

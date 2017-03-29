@@ -26,8 +26,8 @@ class Web implements IDriver
 	// 调用控制器
 	private function analyseURL()
 	{
-		if (isset($_SERVER['PATH_INFO'])) {
-			$path_info = ltrim($_SERVER['PATH_INFO'], '/');
+		if (isset($_SERVER['REQUEST_URI'])) {
+			$path_info = ltrim($_SERVER['REQUEST_URI'], '/');
 			$arr = explode('/', $path_info);
 			$module = $arr[0];
 			$action = $arr[1];

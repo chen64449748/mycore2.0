@@ -14,6 +14,7 @@ class Autoload
 		define('MYTP_CONFIG'     , MYTP_DIR.'Config/');
 		define('MYTP_VIEWS'      , MYTP_DIR.'Views/');
 		define('MYTP_VENDER'     , MYTP_DIR.'Vender/');
+		define('MYTP_VENDOR'     , MYTP_DIR.'vendor/');
 		define('MYTP_SESSION_DRIVER', MYTP_CORE.'Sessiondriver/');
 		define('MYTP_DRIVER'     , MYTP_CORE.'Driver/');
 		define('MYTP_INTERFACE'  , MYTP_CORE.'Interface/');
