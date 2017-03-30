@@ -18,6 +18,7 @@ class Autoload
 		define('MYTP_SESSION_DRIVER', MYTP_CORE.'Sessiondriver/');
 		define('MYTP_DRIVER'     , MYTP_CORE.'Driver/');
 		define('MYTP_INTERFACE'  , MYTP_CORE.'Interface/');
+		define('MYTP_ROUTER'     , MYTP_CORE.'Router/');
 	}
 
 	// 加载配置
@@ -130,6 +131,15 @@ class Autoload
 		
 	}
 
+	// 自动加载router
+	private static function loadRouter($name)
+	{
+		$filename = MYTP_ROUTER.basename($name).'.php';
+		if (file_exists($filename)) {
+			include_once($filename);
+		}	
+	}
+
 	static function auto()
 	{
 		self::setDir();
@@ -140,7 +150,7 @@ class Autoload
 		spl_autoload_register('self::loadInterface');
 		spl_autoload_register('self::loadModel');
 		spl_autoload_register('self::loadController');
-		
+		spl_autoload_register('self::loadRouter');
 
 	}
 }

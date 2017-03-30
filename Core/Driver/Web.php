@@ -29,8 +29,8 @@ class Web implements IDriver
 		if (isset($_SERVER['REQUEST_URI'])) {
 			$path_info = ltrim($_SERVER['REQUEST_URI'], '/');
 			$arr = explode('/', $path_info);
-			$module = $arr[0];
-			$action = $arr[1];
+			$module = isset($arr[0]) && $arr[0] != '' ? $arr[0] : 'Index';
+			$action = isset($arr[1]) && $arr[1] != '' ? $arr[1] : 'index';
 		} else {
 			$module = isset($_REQUEST['module'])?ucfirst(strtolower($_REQUEST['module'])):'Index';
 			$action = isset($_REQUEST['action'])?strtolower($_REQUEST['action']):'index';	
