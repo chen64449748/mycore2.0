@@ -6,11 +6,11 @@ class IndexController extends Controller
 	{
 		
 	}
-
+	
 	function index(User $a, Input $i)
 	{
-		Route::get('/a', ['use'=>1]);
-		var_dump($_SERVER);
-		View::with(array('c'=>'123'));
+		// ECHO 2;
+		// var_dump($_SERVER);
+		// View::with(array('c'=>'123'));
 	}
 }

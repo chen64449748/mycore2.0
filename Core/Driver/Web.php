@@ -26,6 +26,8 @@ class Web implements IDriver
 	// 调用控制器
 	private function analyseURL()
 	{
+
+
 		if (isset($_SERVER['REQUEST_URI'])) {
 			$path_info = ltrim($_SERVER['REQUEST_URI'], '/');
 			$arr = explode('/', $path_info);
@@ -35,7 +37,7 @@ class Web implements IDriver
 			$module = isset($_REQUEST['module'])?ucfirst(strtolower($_REQUEST['module'])):'Index';
 			$action = isset($_REQUEST['action'])?strtolower($_REQUEST['action']):'index';	
 		}
-		
+
 		define('MODULE', $module);
 		define('ACTION', $action);
 	}

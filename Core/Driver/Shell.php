@@ -13,7 +13,7 @@ class Shell implements IDriver
 	{
 
 		$argv = $this->pathArvgs();
-		define('MODULE', 'Cron');
+		define('MODULE', 'CrontabController');
 		define('ACTION', $argv['action']);
 	} 
 

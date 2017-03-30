@@ -45,7 +45,7 @@ class App extends Container
 	{
 		$module = MODULE.'Controller';
 		$action = ACTION;
-	
+
 		$controller = $this->getController($module);
 		$reflection = $this->getReflection($module);
 
