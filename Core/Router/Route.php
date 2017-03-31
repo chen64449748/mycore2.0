@@ -3,17 +3,17 @@
 /**
 *	路由 
 */
-class Route
+class Route implements IDriver
 {
 	private $routers = array();
 	private $groups = array();
 
 	protected $route_group;
-	protected $input = '';
 	protected $request_type = '';
 	protected $request_uri = '';
 	protected $router_result = '';
 	protected $web;
+	protected $route_filter;
 
 	function __construct(Web $web)
 	{
@@ -30,6 +30,12 @@ class Route
 		$this->routers[$name][$route_key] = new Router($request_arr_v);
 	}
 
+	public function setFilter(RouteFilter $route_filter)
+	{
+		$this->route_filter = $route_filter;
+	}
+
+	// 添加路由
 	protected function addRoute($arguments)
 	{
 		if (count($arguments) != 2) {
@@ -69,11 +75,6 @@ class Route
 		$this->groups[] = $route_group;
 		return $route_group;
 	}
-
-	protected function setInput(Input $input)
-	{	
-		$this->input = $input;
-	}
 	
 	protected function getHttpMethod()
 	{
@@ -84,7 +85,8 @@ class Route
 	// 获取上的路由地址
 	protected function setUri()
 	{
-		$this->request_uri = trim($_SERVER['REQUEST_URI'], '/');
+		$uri = isset($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : explode('?', $_SERVER['REQUEST_URI'])[0];
+		$this->request_uri = trim($uri, '/');
 		return $this->request_uri;
 	}
 
@@ -100,6 +102,7 @@ class Route
 		return $routers;
 	}
 
+	// 解析路由
 	public function parseRouter()
 	{
 		$routers = $this->getRouters();
@@ -115,12 +118,13 @@ class Route
 	}
 
 	// 路由
-	public function run()
+	public function run(App $app)
 	{
+		$this->parseRouter();
 		if (!$this->router_result) {
 			throw new Exception("路由解析出错", 99);
 		}
-
+		
 		if ($this->router_result instanceof Closure) {
 
 			call_user_func($this->router_result);
@@ -128,14 +132,45 @@ class Route
 
 			define('MODULE', $this->router_result['Controller']);
 			define('ACTION', $this->router_result['Action']);
-			
-			// 如果有路由过滤
-			if (isset($this->router_result['filter'])) {
-				$route_filter = $this->router_result['filter'];
-				$route_filter->run();
+
+			try {
+				
+				// 如果有路由过滤
+				if (isset($this->router_result['filter'])) {
+					$this->runFilter('filter');
+				}
+
+				$this->web->run($app);
+
+				// after 过滤
+				if (isset($this->router_result['after'])) {
+					$this->runFilter('after');
+				}
+
+			} catch (Exception $e) {
+
+				if (isset($this->router_result['exception'])) {
+					$this->runFilter('exception', $e);
+				}	
+
 			}
 
-			$this->web->run();
 		}
+	}
+
+	private function runFilter($filter, Exception $e = null)
+	{
+		foreach ($this->router_result[$filter] as $filtername) {
+			$next = $this->route_filter->run($filtername, $e);
+		
+			if (!$next) {
+				exit;
+			}
+		}
+	}
+
+	public function error(Exception $e)
+	{
+
 	}
 }

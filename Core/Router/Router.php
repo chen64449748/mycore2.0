@@ -10,7 +10,6 @@ class Router
 
 	function __construct($data)
 	{
-		// print_r($data);
 		if (is_array($data)) {
 			$this->use = $data;
 		} else if ($data instanceof Closure) {
@@ -30,8 +29,12 @@ class Router
 			
 			$filter = array();
 			if (isset($this->use['filter'])) {
-
-				$filter = array('filter' => new RouteFilter($this->use['filter']));
+				// 添加所有路由
+				$filter = array('filter' => array());
+				foreach ($this->use['filter'] as $filtername) {
+					array_push($filter['filter'], $filtername);	
+				}
+				
 			}
 
 			$result = array_merge($this->use, $result, $filter);

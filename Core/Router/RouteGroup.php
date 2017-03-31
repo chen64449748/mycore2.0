@@ -19,9 +19,18 @@ class RouteGroup extends Route
 		
 		$route_key = key($add_route);
 
+		// 如果有过滤
 		if (isset($this->prefix['filter'])) {
 
-			$add_route[$route_key]['filter'] = $this->prefix['filter'];
+			$filter = $this->prefix['filter'];
+
+			// 如果只有一个过滤
+
+			if (is_string($filter)) {
+				$filter = array($filter);
+			}
+
+			$add_route[$route_key]['filter'] = $filter;
 		}
 
 		if (isset($this->prefix['prefix'])) {

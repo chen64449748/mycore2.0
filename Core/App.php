@@ -13,15 +13,15 @@ class App extends Container
 	}
 
 	// APP运行
-	public function run(IDriver $dirve)
+	public function run(IDriver $driver)
 	{
-	
+		$this->setSys();
 		// 调用不同的驱动 加载不同模式
 		try {
-			$dirve->run($this);	
-			if ($dirve instanceof Web) $dirve->log();
+			$driver->run($this);	
+			if ($driver instanceof Web) $driver->log();
 		} catch (Exception $e) {
-			$dirve->error($e);
+			$driver->error($e);
 			
 		}
 		
@@ -37,13 +37,13 @@ class App extends Container
 	private function setSys()
 	{
 		ini_set('display_errors', $GLOBALS['config']['display_err']);
-		ini_set('error_reporting', E_ALL);
+		error_reporting(E_ALL || E_NOTICE);
 	}
 
 	// 请求
 	public function dispatch()
 	{
-		$module = MODULE.'Controller';
+		$module = MODULE;
 		$action = ACTION;
 
 		$controller = $this->getController($module);

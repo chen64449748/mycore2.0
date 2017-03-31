@@ -23,24 +23,24 @@ class Web implements IDriver
 		Session::start();
 	}
 
-	// 调用控制器
-	private function analyseURL()
-	{
+	// 调用控制器  移交给路由解析
+	// private function analyseURL()
+	// {
 
 
-		if (isset($_SERVER['REQUEST_URI'])) {
-			$path_info = ltrim($_SERVER['REQUEST_URI'], '/');
-			$arr = explode('/', $path_info);
-			$module = isset($arr[0]) && $arr[0] != '' ? $arr[0] : 'Index';
-			$action = isset($arr[1]) && $arr[1] != '' ? $arr[1] : 'index';
-		} else {
-			$module = isset($_REQUEST['module'])?ucfirst(strtolower($_REQUEST['module'])):'Index';
-			$action = isset($_REQUEST['action'])?strtolower($_REQUEST['action']):'index';	
-		}
+	// 	if (isset($_SERVER['REQUEST_URI'])) {
+	// 		$path_info = ltrim($_SERVER['REQUEST_URI'], '/');
+	// 		$arr = explode('/', $path_info);
+	// 		$module = isset($arr[0]) && $arr[0] != '' ? $arr[0] : 'Index';
+	// 		$action = isset($arr[1]) && $arr[1] != '' ? $arr[1] : 'index';
+	// 	} else {
+	// 		$module = isset($_REQUEST['module'])?ucfirst(strtolower($_REQUEST['module'])):'Index';
+	// 		$action = isset($_REQUEST['action'])?strtolower($_REQUEST['action']):'index';	
+	// 	}
 
-		define('MODULE', $module);
-		define('ACTION', $action);
-	}
+	// 	define('MODULE', $module);
+	// 	define('ACTION', $action);
+	// }
 	
 	// 包含文件
 	public function inBootstrap()
@@ -55,7 +55,6 @@ class Web implements IDriver
 	{
 		$this->setChar();
 		$this->startSession();
-		$this->analyseURL();
 		$this->inBootstrap();
 		$app->dispatch();
 	}
