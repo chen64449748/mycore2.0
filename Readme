@@ -19,3 +19,10 @@
 	mytp/index.php web入口
 	mytp/shell.php shell执行入口
 	mytp/Queue.php 队列入口(只能使用Queue控制器 redis key名为方法)
+	
+	
+	shell 使用方法 
+	打开终端 进到框架目录 执行 php shell.php action=index   参数action在CrontabController内的方法
+	
+	队列任务使用方法 
+        打开终端 进入目录 php queue.php action=index 参数action即为redis的队列名 QueueController的方法也必须以队列名命名 
