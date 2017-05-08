@@ -1,5 +1,6 @@
 {
 	"require" : {
-		"illuminate/database": "*"
+		"illuminate/database": "*",
+		"php-amqplib/php-amqplib" : ">=2.6.1"
 	}
 }

@@ -9,7 +9,15 @@ class IndexController extends Controller
 	
 	function index(User $a, Input $i)
 	{
-		// var_dump($_SERVER);
-		// View::with(array('c'=>'123'));
+		
+		
+
+
+		
+	}
+
+	function send($ex)
+	{
+
 	}
 }

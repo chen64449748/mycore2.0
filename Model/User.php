@@ -3,6 +3,6 @@ class User
 {
 	public function index()
 	{
-		echo 'user index';
+	 	return file_get_contents('./a.txt');
 	}
 }

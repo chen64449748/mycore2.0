@@ -53,7 +53,7 @@ class Container
 			array_unshift($params, $this);
 			return call_user_func_array($this->binds[$abstract], $params);
 		}
-
+		$this->instance($abstract, $obj);
 		return $obj;
 	}
 

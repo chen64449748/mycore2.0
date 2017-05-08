@@ -12,7 +12,7 @@ $route->get('/', ['use'=> 'IndexController@index']);
 
 
 $route->group(['prefix'=>'admin_', 'filter'=>'a' ], function($route) {
-	$route->get('/b', ['use' => 'IndexController@index']);
+	$route->get('/b', ['use' => 'IndexController@soap']);
 });
 
 $route->group(['prefix'=>'user_'], function($route) {

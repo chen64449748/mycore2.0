@@ -7,9 +7,9 @@ class App extends Container
 {
 	public function __construct()
 	{
-		$this->bind('Web');
-		$this->bind('Shell');
-		$this->bind('Queue');
+		// $this->bind('Web');
+		// $this->bind('Shell');
+		// $this->bind('Queue');
 	}
 
 	// APP运行

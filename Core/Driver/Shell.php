@@ -30,6 +30,6 @@ class Shell implements IDriver
 
 	public function error(Exception $e)
 	{
-
+		echo $e->getMessage().PHP_EOL;
 	}
 }
